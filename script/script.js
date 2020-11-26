@@ -18,38 +18,50 @@ function guesNumber() {
     counter = 9;
     //И даже функция которая замыкается
 
-
-      askUser = function () {
+    askUser = function () {
 
         userAnswer = prompt('Угадай число от 1 до 100');
+
         if (userAnswer === null) {
             alert('Игра окончена');
             return;
         }
+        if (userAnswer.trim() === "") {
+            alert('Вы ничего не ввели,попробуйте еще раз');
+            askUser();
+            return;
+        }
+
         userAnswer = +userAnswer;
+
+
         if (!isNaN(userAnswer)) {
             if (userAnswer > 100) {
                 alert('Вы указали число больше 100 ,попробуйте еще раз');
                 askUser();
+                return;
 
             } else if (userAnswer < 1) {
                 alert('Вы указали число меньше 1 ,попробуйте еще раз');
                 askUser();
+                return;
             }
 
-        } else if (typeof (userAnswer) === 'string') {
+        } else if (isNaN(userAnswer)) {
             alert('Вы указали не число ,попробуйте еще раз');
             askUser();
-            return;
+
 
         }
+
+
 
 
 
         return userAnswer;
 
     };
-    
+
 
     function checkAnswer() {
 
@@ -58,14 +70,18 @@ function guesNumber() {
         if (counter > 0) {
 
             if (numToCheck > randomNumber) {
-                counter--;
+
                 alert('Загаданное число меньше.У вас осталось: ' + counter + ' попыток');
+                counter--;
                 checkAnswer();
+                return;
 
             } else if (numToCheck < randomNumber) {
-                counter--;
+
                 alert('Загаданное число больше.У вас осталось: ' + counter + ' попыток');
+                counter--;
                 checkAnswer();
+                return;
 
             } else if (numToCheck === randomNumber) {
 
