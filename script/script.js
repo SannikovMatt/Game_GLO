@@ -104,5 +104,5 @@ function guesNumber() {
 
 let askUser = guesNumber();
 
-
+//Запуск  
 askUser();
